@@ -1,0 +1,60 @@
+{
+  "name": "smit-store-sdk",
+  "version": "1.0.0",
+  "description": "SMIT.STORE JAVASCRIPT SDK",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rollup": "rollup -c",
+    "start": "SERVE=true rollup -c -w",
+    "lint": "eslint --ext .js src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smitnet/smit-store-sdk-js.git"
+  },
+  "keywords": [
+    "smit",
+    "store",
+    "sdk",
+    "js"
+  ],
+  "author": "SMIT. Digitaal vakmanschap B.V.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smitnet/smit-store-sdk-js/issues"
+  },
+  "homepage": "https://github.com/smitnet/smit-store-sdk-js#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-stage-3": "^7.8.3",
+    "@babel/runtime": "^7.12.5",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-inline-json-import": "^0.3.2",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "regenerator-runtime": "^0.13.7",
+    "rollup": "^2.34.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-filesize": "^9.1.0",
+    "rollup-plugin-ignore": "^1.0.9",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "es6-promise": "^4.2.8",
+    "fetch-everywhere": "^1.0.5"
+  }
+}

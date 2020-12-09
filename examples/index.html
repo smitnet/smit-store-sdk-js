@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- add preconnect statements -->
+    <title>Example Store</title>
+
+    <script src="/dist/1.0.0/sdk.js"></script><!-- because we are already inside dist -->
+</head>
+<body>
+    <h1>Example Store</h1>
+    <p>Please run <code style="background-color:lightgray;padding:4px;">npm run build</code> in order to make this example work</p>
+
+    <div class="product">
+        <button
+            date-item-id=""
+            date-item-name=""
+            date-item-price=""
+            date-item-url=""
+            date-item-description=""
+            date-item-image=""
+            data-item-variations=""
+        ></button>
+    </div>
+
+    <script>
+        var SDK = SmitStore.Build({
+            currency: 'EUR',
+            productClass: 'add-item'
+        });
+
+        var products = SDK.Products.All().then(function(response) {
+            console.log(response.data[0].name)
+        });
+    </script>
+</body>
+</html>

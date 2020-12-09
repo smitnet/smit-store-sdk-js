@@ -1,0 +1,80 @@
+import pkg from './package.json'
+import babel from 'rollup-plugin-babel'
+import { terser } from 'rollup-plugin-terser'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
+import json from 'rollup-plugin-json'
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
+import filesize from 'rollup-plugin-filesize'
+
+const { NODE_ENV = 'development' } = process.env
+const isProduction = NODE_ENV === 'production'
+const isDevelopment = NODE_ENV === 'development' && process.env.SERVE === 'true'
+
+const config = {
+    input: 'src/index.js',
+    watch: {
+        include: 'src/**'
+    },
+    external: ['es6-promise'], // ['fetch-everywhere'],
+    plugins: [
+        json(),
+        babel({
+            babelrc: false,
+            exclude: ['package.json', '**/node_modules/**'],
+            presets: [
+                [
+                    '@babel/preset-env',
+                    {
+                        corejs: 3,
+                        modules: false,
+                        useBuiltIns: 'usage',
+                        targets: {
+                            ie: '11',
+                        },
+                    },
+                ],
+            ]
+        }),
+        filesize()
+    ]
+}
+
+export default [
+    {
+        ...config,
+        output: {
+            name: 'SmitStore',
+            exports: 'named',
+            file: `public/dist/${pkg.version}/sdk.js`,
+            format: 'umd',
+        },
+        plugins: [
+            ...config.plugins,
+            resolve({ browser: true }),
+            commonjs(),
+            isProduction &&
+            terser(),
+            isDevelopment && serve({ contentBase: ['public', 'examples'], open: true }),
+            isDevelopment && livereload()
+        ].filter(Boolean)
+    },
+    {
+        ...config,
+        output: {
+            file: pkg['cjs:main'],
+            format: 'cjs',
+            exports: 'named'
+        },
+        external: [...config.external, ...Object.keys(pkg.dependencies || {})]
+    },
+    {
+        ...config,
+        output: {
+            file: pkg.module,
+            format: 'es',
+        },
+        external: [...config.external, ...Object.keys(pkg.dependencies || {})]
+    }
+]
