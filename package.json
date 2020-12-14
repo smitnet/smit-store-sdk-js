@@ -3,6 +3,9 @@
   "version": "1.0.4",
   "description": "SMIT.STORE JAVASCRIPT SDK",
   "main": "src/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "test": "jest",
     "rollup": "rollup -c",
