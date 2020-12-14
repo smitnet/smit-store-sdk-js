@@ -18,8 +18,23 @@
 ...
 
 ```html
-<div id="smit-store" data-api-key="[[API_KEY]]" hidden></div>
-<script src="//cdn.smit.store/dist/sdk.js" defer></script>
+<script src="//cdn.smit.store/dist/{{ version }}/sdk.js?api={{ apiKey }}"></script>
+```
+
+### Recommedations
+
+Add the following to first lines within your document head:
+
+```html
+<link rel="preconnect" href="https://api.smit.store" />
+<link rel="preconnect" href="https://cdn.smit.store" />
+```
+
+The following can serve as fallback:
+
+```html
+<link rel="dns-prefetch" href="https://api.smit.store" />
+<link rel="dns-prefetch" href="https://cdn.smit.store" />
 ```
 
 ### Installation
@@ -30,7 +45,16 @@ npm install --save @smitnet/smit-store-sdk-js
 ```
 
 ### Configuration
-...
+
+```html
+<script type="text/javascript">
+    var SomeNameForSDK = window.SmitStore.Build({
+        // configuration options
+    })
+
+    SomeNameForSDK.Products.All().then(function(data) { /* do something with `data` */ })
+<script>
+```
 
 ## Documentation and references
 ...
@@ -43,6 +67,16 @@ This repository is published under [MIT](LICENSE.md).
 
 ## Contribution
 
+### Development
+
+To start a new version:
+
 ```shell
 npm version patch && npm run build
+```
+
+To start the LiveReload version you can use:
+
+```shell
+npm run start
 ```
