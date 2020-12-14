@@ -41,7 +41,7 @@ The following can serve as fallback:
 ...
 
 ```shell
-npm install --save @smitnet/smit-store-sdk-js
+npm install --save @smitnet/smit-store-sdk
 ```
 
 ### Configuration
