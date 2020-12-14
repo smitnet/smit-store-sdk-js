@@ -1,11 +1,14 @@
 import Config from './config'
-import SessionResource from './resources/sessions.js'
-import ProductResource from './resources/products.js'
+import CartResource from './resources/carts'
+import SessionResource from './resources/sessions'
+import ProductResource from './resources/products'
+import FrontendComponents from './views/index'
 
 export default class SmitStore {
     constructor(config) {
         this.config = config
 
+        this.Cart = new CartResource(config)
         this.Sessions = new SessionResource(config)
         this.Products = new ProductResource(config)
 
@@ -117,10 +120,10 @@ export { Build }
                     } else {
                         SmitStore.__error('Missing valid configuration "api"')
                     }
+
+                    FrontendComponents() // loads frontend components (like cart, checkout etc.)
                 }
             }
-
-            // TODO: load frontend components
         })
     }
 })()

@@ -1,6 +1,6 @@
-import BaseResource from './extends/base'
+import CrudResource from './extends/crud'
 
-class ProductResource extends BaseResource {
+class ProductResource extends CrudResource {
     constructor(config) {
         super(config)
 
