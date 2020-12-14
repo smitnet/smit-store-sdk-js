@@ -4,15 +4,45 @@ class BaseResource {
     constructor(config) {
         this.request = new RequestHelper(config)
         this.config = config
-
-        this.version = this.config.version
         this.resource = null
+        this.metadata = {}
+    }
+
+    Metadata() {
+        this.Meta()
+    }
+
+    Meta() {
+        return this.metadata
     }
 
     All() {
-        return this.request.get(`/api/${this.version}/${this.resource}`);
+        return this.request.get(this.resource).then((response) => {
+            if (typeof response.data === 'object') {
+                const json = response.data
+
+                if (json.hasOwnProperty('meta')) {
+                    this.metadata = json.meta
+                }
+
+                return json.hasOwnProperty('data') ? json.data : json
+            }
+
+            return response.data
+        });
     }
-    Get() { /** ... */ }
+
+    Get(id = undefined) {
+        if (id === undefined) {
+            throw Error('Missing "id" from request')
+        }
+
+        return this.request.get(`${this.resource}/${id}`).then((response) => {
+            return typeof response.data === 'object' && response.data.hasOwnProperty('data')
+                ? response.data.data : response.data
+        });
+    }
+
 }
 
 export default BaseResource

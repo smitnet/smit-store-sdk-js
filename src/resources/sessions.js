@@ -8,18 +8,14 @@ class SessionResource extends BaseResource {
     }
 
     Guest() {
-        const response = this.request.get('/api/v1/session', null)
-
-        return response.data
+        return this.request.get(this.resource)
     }
 
     Login(username, password) {
-        const response = this.request.post('api/v1/session', {
+        return this.request.post(this.resource, {
             ...username,
             ...password
         })
-
-        return response.data
     }
 }
 

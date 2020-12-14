@@ -3,28 +3,51 @@ import pkg from '../package.json'
 class Config {
     constructor(options) {
         const {
+            apiKey,
+            hostname,
+            protocol,
             currency,
             language,
-            headers
+            version,
+            headers,
+            addCartClass,
+            throwExceptions,
+            isDebug,
         } = options
 
+        // request
+        this.apiKey = apiKey || null
+        this.headers = headers || {}
+        this.protocol = protocol || 'https'
+        this.hostname = hostname || 'api.smit.store'
+        this.version = version || 'v1'
+        this.resource = null
+
+        // localization
         this.currency = currency || 'EUR'
         this.language = language || 'nl'
-        this.headers = headers || {}
-        this.protocol = 'https'
-        this.hostname = 'api.smit.store'
-        this.version = 'v1'
-        this.resource = null
+
+        // browser
+        this.addCartClass = addCartClass || 'add-cart'
+
+        // metadata
         this.sdk = {
             version: pkg.version,
-            language: 'JS'
+            language: 'JS',
+            environment: 'none',
+            exceptions: this.throwExceptions || true,
+            isDebug: this.isDebug || false,
         }
 
-        this._baseUrl = `${this.protocol}://${this.hostname}`
+        if (!this.protocol) {
+            throw new Error('Missing "protocol" from configuration options')
+        }
 
-        // if (!this.host) {
-        //     throw new Error('Missing "host" from configuration options')
-        // }
+        if (!this.hostname) {
+            throw new Error('Missing "hostname" from configuration options')
+        }
+
+        this._baseUrl = `${this.protocol}://${this.hostname}/api/${this.version}`
     }
 }
 

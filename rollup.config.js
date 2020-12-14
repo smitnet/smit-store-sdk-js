@@ -31,11 +31,17 @@ const config = {
                         modules: false,
                         useBuiltIns: 'usage',
                         targets: {
+                            node: 'current',
                             ie: '11',
                         },
                     },
                 ],
-            ]
+            ],
+            // plugins: [
+            //     ["@babel/transform-runtime", {
+            //         "regenerator": true
+            //     }]
+            // ]
         }),
         filesize()
     ]

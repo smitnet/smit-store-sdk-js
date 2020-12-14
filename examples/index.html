@@ -4,33 +4,83 @@
     <!-- add preconnect statements -->
     <title>Example Store</title>
 
-    <script src="/dist/1.0.0/sdk.js"></script><!-- because we are already inside dist -->
+    <meta charset="UTF-8">
+
+
+    <style type="text/css">
+        .product {
+            padding: 1rem;
+            margin: 0.25rem;
+            border: 1px solid gray;
+        }
+    </style>
 </head>
 <body>
     <h1>Example Store</h1>
-    <p>Please run <code style="background-color:lightgray;padding:4px;">npm run build</code> in order to make this example work</p>
+    <p>
+        Please run
+        <code style="background-color:lightgray;padding:4px;">npm run build</code>,
+        <code style="background-color:lightgray;padding:4px;">npm run start</code>,
+        or
+        <code style="background-color:lightgray;padding:4px;">npm run watch</code>
+        in order to make this example work
+    </p>
 
     <div class="product">
+        <h3>Heineken Pilsner longneck 24X33CL</h3>
+        <p>
+            Heineken Pilsner is in 1873 ontstaan en is momenteel 's werelds meest internationale biermerk. Heineken is een pils, kenmerkend door zijn fris, fruitig gistaroma en de milde bittere, goed doordrinkbare smaak.
+        </p>
         <button
-            date-item-id=""
-            date-item-name=""
-            date-item-price=""
-            date-item-url=""
-            date-item-description=""
-            date-item-image=""
+            class="add-cart"
+            data-item-id="1"
+            data-item-name="Heineken Pilsner longneck 24X33CL"
+            data-item-price="29.95"
+            data-item-url="doos-heineken-pilsner-longneck-24x33cl"
+            data-item-description="Heineken Pilsner Longneck. Eenvoudig en betrouwbaar tegen de laagste prijs te bestellen bij DrankDozijn, de online slijterij voor al uw dranken."
+            data-item-image="https://res.cloudinary.com/boozeboodcdn/image/upload/f_auto/e_trim:10/c_pad/g_south/w_140/h_455/c_limit,w_140,h_455/q_auto:best/v20201201/HD/02030.jpg"
             data-item-variations=""
-        ></button>
+        >Toevoegen</button>
     </div>
 
-    <script>
-        var SDK = SmitStore.Build({
-            currency: 'EUR',
-            productClass: 'add-item'
-        });
+    <div class="product">
+        <h3>Bacardi Carta Blanca 1LTR</h3>
+        <p>
+            Bacardi Carta Blanca 1 liter is de grondlegger van het succes van dit alom bekende rum merk. Deze witte rum vormt sinds jaar en dag het hart van het assortiment en is de bekendste van alle Bacardi smaken. Het heeft de oprichter van het merk, Don Facundo, tien jaar gekost om deze rum te ontwikkelen en door de jaren heen heeft deze de harten van rum liefhebbers over de gehele wereld veroverd. Behalve de 1 liter fles, is de Bacardi Carta Blanca ook verkrijgbaar in andere formaten.
 
-        var products = SDK.Products.All().then(function(response) {
-            console.log(response.data[0].name)
-        });
-    </script>
+Bacardi Carta Blanca heeft een veelzijdig karakter met zachte smaakinvloeden van vanille en amandel, die het verkrijgt als resultaat van een rijping op witte eikenhouten vaten. Vervolgens is het de taak van de Master Blender van het merk om het juiste karakter te creëren. Dit ontstaat door de inhoud van verschillende vaten tot in perfectie te blenden, waarna Bacardi Carta Blanca een feit is.
+
+Wanneer je op zoek bent naar voordelige Bacardi dan ben je hier aan het juiste adres. Met een literfles geniet je éxtra lang en lekker goedkoop! Ontdek zelf de veelzijdigheid van deze rum en maak in een handomdraai de lekkerste mixdrankjes en cocktails. Ook voor andere Bacardi soorten ben je bij ons aan het juiste adres.
+        </p>
+        <button
+            class="add-cart"
+            data-item-id="2"
+            data-item-name="Bacardi Carta Blanca 1LTR"
+            data-item-price="17.50"
+            data-item-url="fles-bacardi-carta-blanca-1ltr"
+            data-item-description="Bacardi Carta Blanca 1 liter is de grondlegger van het succes van dit alom bekende rum merk. Deze witte rum vormt sinds jaar en dag het hart van het assortiment en is de bekendste van alle Bacardi smaken. Het heeft de oprichter van het merk, Don Facundo, tien jaar gekost om deze rum te ontwikkelen en door de jaren heen heeft deze de harten van rum liefhebbers over de gehele wereld veroverd. Behalve de 1 liter fles, is de Bacardi Carta Blanca ook verkrijgbaar in andere formaten.
+
+            Bacardi Carta Blanca heeft een veelzijdig karakter met zachte smaakinvloeden van vanille en amandel, die het verkrijgt als resultaat van een rijping op witte eikenhouten vaten. Vervolgens is het de taak van de Master Blender van het merk om het juiste karakter te creëren. Dit ontstaat door de inhoud van verschillende vaten tot in perfectie te blenden, waarna Bacardi Carta Blanca een feit is.
+
+            Wanneer je op zoek bent naar voordelige Bacardi dan ben je hier aan het juiste adres. Met een literfles geniet je éxtra lang en lekker goedkoop! Ontdek zelf de veelzijdigheid van deze rum en maak in een handomdraai de lekkerste mixdrankjes en cocktails. Ook voor andere Bacardi soorten ben je bij ons aan het juiste adres."
+            data-item-image="https://res.cloudinary.com/boozeboodcdn/image/upload/f_auto/e_trim:10/c_pad/g_south/w_140/h_455/c_limit,w_140,h_455/q_auto:best/v20201201/HD/02030.jpg"
+            data-item-variations=""
+        >Toevoegen</button>
+    </div>
+
+    <script src="/dist/1.0.0/sdk.js?api=72088b2f-3d10-40a5-81ad-afc238037a87"></script>
+    <!-- <script>
+        window.SmitStore.Products.All().then(function(products) {
+            // Method #1
+            for (let index = 0; index < products.length; index += 1) {
+                console.log('for...iterate', products[index].name)
+            }
+
+            // Method #2
+            for (const index in products) {
+                console.log('for...in', products[index].name)
+            }
+        })
+    </script> -->
 </body>
 </html>
