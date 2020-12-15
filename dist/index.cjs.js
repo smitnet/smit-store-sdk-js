@@ -6,218 +6,34 @@ require('core-js/modules/es.regexp.constructor');
 require('core-js/modules/es.regexp.exec');
 require('core-js/modules/es.regexp.to-string');
 require('core-js/modules/es.string.replace');
+var _classCallCheck = require('@babel/runtime/helpers/classCallCheck');
+var _createClass = require('@babel/runtime/helpers/createClass');
 require('core-js/modules/es.array.concat');
+var _defineProperty = require('@babel/runtime/helpers/defineProperty');
+var _inherits = require('@babel/runtime/helpers/inherits');
+var _possibleConstructorReturn = require('@babel/runtime/helpers/possibleConstructorReturn');
+var _getPrototypeOf = require('@babel/runtime/helpers/getPrototypeOf');
+var _typeof = require('@babel/runtime/helpers/typeof');
+var _regeneratorRuntime = require('@babel/runtime/regenerator');
 require('regenerator-runtime/runtime');
+var _asyncToGenerator = require('@babel/runtime/helpers/asyncToGenerator');
 var axios = require('axios');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
+var _classCallCheck__default = /*#__PURE__*/_interopDefaultLegacy(_classCallCheck);
+var _createClass__default = /*#__PURE__*/_interopDefaultLegacy(_createClass);
+var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
+var _inherits__default = /*#__PURE__*/_interopDefaultLegacy(_inherits);
+var _possibleConstructorReturn__default = /*#__PURE__*/_interopDefaultLegacy(_possibleConstructorReturn);
+var _getPrototypeOf__default = /*#__PURE__*/_interopDefaultLegacy(_getPrototypeOf);
+var _typeof__default = /*#__PURE__*/_interopDefaultLegacy(_typeof);
+var _regeneratorRuntime__default = /*#__PURE__*/_interopDefaultLegacy(_regeneratorRuntime);
+var _asyncToGenerator__default = /*#__PURE__*/_interopDefaultLegacy(_asyncToGenerator);
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-
-  try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
-  return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
-        result;
-
-    if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf(this).constructor;
-
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-
-    return _possibleConstructorReturn(this, result);
-  };
-}
-
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.14";
+var version = "1.0.15";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -269,19 +85,20 @@ var devDependencies = {
 	jest: "^26.6.3",
 	"regenerator-runtime": "^0.13.7",
 	rollup: "^2.34.2",
+	"rollup-plugin-auto-external": "^2.0.0",
 	"rollup-plugin-babel": "^4.4.0",
 	"rollup-plugin-commonjs": "^10.1.0",
 	"rollup-plugin-filesize": "^9.1.0",
 	"rollup-plugin-ignore": "^1.0.9",
 	"rollup-plugin-json": "^4.0.0",
 	"rollup-plugin-livereload": "^2.0.0",
+	"rollup-plugin-node-polyfills": "^0.2.1",
 	"rollup-plugin-serve": "^1.1.0",
 	"rollup-plugin-sourcemaps": "^0.6.3",
 	"rollup-plugin-terser": "^7.0.2"
 };
 var dependencies = {
-	axios: "^0.21.0",
-	"core-js": "^2.6.12"
+	axios: "^0.21.0"
 };
 var directories = {
 	example: "examples",
@@ -309,7 +126,7 @@ var pkg = {
 };
 
 var Config = function Config(options) {
-  _classCallCheck(this, Config);
+  _classCallCheck__default['default'](this, Config);
 
   var apiKey = options.apiKey,
       hostname = options.hostname,
@@ -355,17 +172,17 @@ var Config = function Config(options) {
 
 var RequestHelper = /*#__PURE__*/function () {
   function RequestHelper(config) {
-    _classCallCheck(this, RequestHelper);
+    _classCallCheck__default['default'](this, RequestHelper);
 
     this.config = config;
   }
 
-  _createClass(RequestHelper, [{
+  _createClass__default['default'](RequestHelper, [{
     key: "get",
     value: function () {
-      var _get = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
+      var _get = _asyncToGenerator__default['default']( /*#__PURE__*/_regeneratorRuntime__default['default'].mark(function _callee(url) {
         var endpoint, response;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regeneratorRuntime__default['default'].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -410,9 +227,9 @@ var RequestHelper = /*#__PURE__*/function () {
   }, {
     key: "post",
     value: function () {
-      var _post = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url, data) {
+      var _post = _asyncToGenerator__default['default']( /*#__PURE__*/_regeneratorRuntime__default['default'].mark(function _callee2(url, data) {
         var endpoint, response, results;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime__default['default'].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
@@ -431,7 +248,7 @@ var RequestHelper = /*#__PURE__*/function () {
 
                 results = null;
 
-                if (_typeof(response.data) === Object && response.data.hasOwnProperty('data')) {
+                if (_typeof__default['default'](response.data) === Object && response.data.hasOwnProperty('data')) {
                   results = response.data.data;
                 } else {
                   results = response.data;
@@ -469,7 +286,7 @@ var RequestHelper = /*#__PURE__*/function () {
 
 var BaseResource = /*#__PURE__*/function () {
   function BaseResource(config) {
-    _classCallCheck(this, BaseResource);
+    _classCallCheck__default['default'](this, BaseResource);
 
     this.request = new RequestHelper(config);
     this.config = config;
@@ -477,7 +294,7 @@ var BaseResource = /*#__PURE__*/function () {
     this.metadata = {};
   }
 
-  _createClass(BaseResource, [{
+  _createClass__default['default'](BaseResource, [{
     key: "Metadata",
     value: function Metadata() {
       this.Meta();
@@ -493,7 +310,7 @@ var BaseResource = /*#__PURE__*/function () {
       var _this = this;
 
       return this.request.get(this.resource).then(function (response) {
-        if (_typeof(response.data) === 'object') {
+        if (_typeof__default['default'](response.data) === 'object') {
           var json = response.data;
 
           if (json.hasOwnProperty('meta')) {
@@ -516,7 +333,7 @@ var BaseResource = /*#__PURE__*/function () {
       }
 
       return this.request.get("".concat(this.resource, "/").concat(id)).then(function (response) {
-        return _typeof(response.data) === 'object' && response.data.hasOwnProperty('data') ? response.data.data : response.data;
+        return _typeof__default['default'](response.data) === 'object' && response.data.hasOwnProperty('data') ? response.data.data : response.data;
       });
     }
   }]);
@@ -524,22 +341,30 @@ var BaseResource = /*#__PURE__*/function () {
   return BaseResource;
 }();
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty__default['default'](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf__default['default'](Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf__default['default'](this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn__default['default'](this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 var SessionResource = /*#__PURE__*/function (_BaseResource) {
-  _inherits(SessionResource, _BaseResource);
+  _inherits__default['default'](SessionResource, _BaseResource);
 
   var _super = _createSuper(SessionResource);
 
   function SessionResource(config) {
     var _this;
 
-    _classCallCheck(this, SessionResource);
+    _classCallCheck__default['default'](this, SessionResource);
 
     _this = _super.call(this, config);
     _this.resource = 'session';
     return _this;
   }
 
-  _createClass(SessionResource, [{
+  _createClass__default['default'](SessionResource, [{
     key: "Guest",
     value: function Guest() {
       return this.request.get(this.resource);
@@ -547,22 +372,26 @@ var SessionResource = /*#__PURE__*/function (_BaseResource) {
   }, {
     key: "Login",
     value: function Login(username, password) {
-      return this.request.post(this.resource, _objectSpread2(_objectSpread2({}, username), password));
+      return this.request.post(this.resource, _objectSpread(_objectSpread({}, username), password));
     }
   }]);
 
   return SessionResource;
 }(BaseResource);
 
-var ProductResource = /*#__PURE__*/function (_BaseResource) {
-  _inherits(ProductResource, _BaseResource);
+function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf__default['default'](Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf__default['default'](this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn__default['default'](this, result); }; }
 
-  var _super = _createSuper(ProductResource);
+function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var ProductResource = /*#__PURE__*/function (_BaseResource) {
+  _inherits__default['default'](ProductResource, _BaseResource);
+
+  var _super = _createSuper$1(ProductResource);
 
   function ProductResource(config) {
     var _this;
 
-    _classCallCheck(this, ProductResource);
+    _classCallCheck__default['default'](this, ProductResource);
 
     _this = _super.call(this, config);
     _this.resource = 'products';
@@ -574,7 +403,7 @@ var ProductResource = /*#__PURE__*/function (_BaseResource) {
 
 var SmitStore = /*#__PURE__*/function () {
   function SmitStore(config) {
-    _classCallCheck(this, SmitStore);
+    _classCallCheck__default['default'](this, SmitStore);
 
     this.config = config;
     this.Sessions = new SessionResource(config);
@@ -598,7 +427,7 @@ var SmitStore = /*#__PURE__*/function () {
    */
 
 
-  _createClass(SmitStore, [{
+  _createClass__default['default'](SmitStore, [{
     key: "__debug",
     value: function __debug() {
       if (this.config.sdk.isDebug) {

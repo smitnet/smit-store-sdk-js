@@ -7,30 +7,42 @@ import json from 'rollup-plugin-json'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 import filesize from 'rollup-plugin-filesize'
+import autoExternals from 'rollup-plugin-auto-external'
 
 const { NODE_ENV = 'development' } = process.env
 const isProduction = NODE_ENV === 'production'
 const isDevelopment = NODE_ENV === 'development' && process.env.SERVE === 'true'
+
+const moduleExternals = [
+    'regenerator-runtime/runtime',
+    'core-js/modules/es.regexp.constructor',
+    'core-js/modules/es.regexp.exec',
+    'core-js/modules/es.regexp.to-string',
+    'core-js/modules/es.string.replace',
+    '@babel/runtime/helpers/classCallCheck',
+    '@babel/runtime/helpers/createClass',
+    'core-js/modules/es.array.concat',
+    '@babel/runtime/helpers/defineProperty',
+    '@babel/runtime/helpers/inherits',
+    '@babel/runtime/helpers/possibleConstructorReturn',
+    '@babel/runtime/helpers/getPrototypeOf',
+    '@babel/runtime/helpers/typeof',
+    '@babel/runtime/regenerator',
+    '@babel/runtime/helpers/asyncToGenerator',
+]
 
 const config = {
     input: 'src/index.js',
     watch: {
         include: 'src/**'
     },
-    external: [
-        'core-js/modules/es.array.index-of',
-        'core-js/modules/es.object.keys',
-        'core-js/modules/es.regexp.constructor',
-        'core-js/modules/es.regexp.exec',
-        'core-js/modules/es.regexp.to-string',
-        'core-js/modules/es.string.replace',
-        'core-js/modules/es.array.concat',
-        'regenerator-runtime/runtime'
-    ],
+    external: ['axios'],
     plugins: [
         json(),
+        autoExternals(),
         babel({
             babelrc: false,
+            runtimeHelpers: true,
             exclude: ['package.json', '**/node_modules/**'],
             presets: [
                 [
@@ -46,11 +58,11 @@ const config = {
                     },
                 ],
             ],
-            // plugins: [
-            //     ["@babel/transform-runtime", {
-            //         "regenerator": true
-            //     }]
-            // ]
+            plugins: [
+                ["@babel/transform-runtime", {
+                    "regenerator": true
+                }]
+            ]
         }),
         filesize()
     ]
@@ -64,16 +76,20 @@ export default [
             exports: 'named',
             file: pkg['browser'],
             format: 'umd',
+            globals: ['axios']
         },
         plugins: [
             ...config.plugins,
-            resolve({ browser: true }),
+            resolve({
+                browser: true,
+            }),
             commonjs(),
             isProduction &&
             terser(),
             isDevelopment && serve({ contentBase: ['examples'], open: true }),
             isDevelopment && livereload()
-        ].filter(Boolean)
+        ].filter(Boolean),
+        external: [...config.external, ...Object.keys(pkg.dependencies || {})]
     },
     {
         ...config,
@@ -82,7 +98,7 @@ export default [
             format: 'cjs',
             exports: 'named'
         },
-        external: [...config.external, ...Object.keys(pkg.dependencies || {})]
+        external: [...config.external, ...moduleExternals, ...Object.keys(pkg.dependencies || {})]
     },
     {
         ...config,
@@ -90,6 +106,6 @@ export default [
             file: pkg['module'],
             format: 'es',
         },
-        external: [...config.external, ...Object.keys(pkg.dependencies || {})]
+        external: [...config.external, ...moduleExternals, ...Object.keys(pkg.dependencies || {})]
     }
 ]
