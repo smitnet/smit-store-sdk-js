@@ -211,7 +211,7 @@ function _createSuper(Derived) {
 }
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.11";
+var version = "1.0.12";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"

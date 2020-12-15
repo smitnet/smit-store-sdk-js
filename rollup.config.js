@@ -17,7 +17,16 @@ const config = {
     watch: {
         include: 'src/**'
     },
-    external: ['es6-promise'], // ['fetch-everywhere'],
+    external: [
+        'core-js/modules/es.array.index-of',
+        'core-js/modules/es.object.keys',
+        'core-js/modules/es.regexp.constructor',
+        'core-js/modules/es.regexp.exec',
+        'core-js/modules/es.regexp.to-string',
+        'core-js/modules/es.string.replace',
+        'core-js/modules/es.array.concat',
+        'regenerator-runtime/runtime'
+    ],
     plugins: [
         json(),
         babel({
