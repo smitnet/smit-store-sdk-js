@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "es6-promise": "^4.2.8"
+    "core-js": "^2.6.12"
   },
   "directories": {
     "example": "examples",

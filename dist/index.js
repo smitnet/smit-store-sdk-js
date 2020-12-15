@@ -207,7 +207,7 @@
   }
 
   var name = "@smitnet/smit-store-sdk";
-  var version = "1.0.13";
+  var version = "1.0.14";
   var description = "SMIT.STORE JAVASCRIPT SDK";
   var publishConfig = {
   	access: "public"
@@ -271,7 +271,7 @@
   };
   var dependencies = {
   	axios: "^0.21.0",
-  	"es6-promise": "^4.2.8"
+  	"core-js": "^2.6.12"
   };
   var directories = {
   	example: "examples",
