@@ -41,18 +41,12 @@ const config = {
         json(),
         autoExternals(),
         babel({
-            babelrc: false,
-            runtimeHelpers: true,
             exclude: ['package.json', '**/node_modules/**'],
-            presets: [
-                [
-                    '@babel/preset-env',
-                ],
-            ],
             plugins: [
-                ["@babel/transform-runtime", {
-                    "regenerator": true
-                }]
+                "@babel/plugin-syntax-dynamic-import",
+                "@babel/plugin-syntax-import-meta",
+                ["@babel/plugin-proposal-class-properties", { "loose": false }],
+                "@babel/plugin-proposal-json-strings"
             ]
         }),
         filesize()
