@@ -95,32 +95,32 @@ export default class SmitStore {
 const Build = config => new SmitStore(new Config(config))
 export { Build }
 
-(function () {
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-        const SmitStore = window.SmitStore = (typeof window.SmitStore === Object && Object.keys(window.SmitStore).length !== 0)
-            ? window.SmitStore
-            : Build({})
+// (function () {
+//     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+//         const SmitStore = window.SmitStore = (typeof window.SmitStore === Object && Object.keys(window.SmitStore).length !== 0)
+//             ? window.SmitStore
+//             : Build({})
 
-        // TODO: add cross browser support for `document loaded`
-        document.addEventListener('DOMContentLoaded', (e) => {
-            let self = null;
-            let scripts = document.getElementsByTagName('script')
-            for (var index = 0; index < scripts.length; ++index) {
-                let source = scripts[index].getAttribute('src')
-                if (source !== null && source.toLowerCase().indexOf(`/dist/${window.SmitStore.config.sdk.version}/sdk.js`.toLowerCase()) > -1) {
-                    self = scripts[index];
+//         // TODO: add cross browser support for `document loaded`
+//         document.addEventListener('DOMContentLoaded', (e) => {
+//             let self = null;
+//             let scripts = document.getElementsByTagName('script')
+//             for (var index = 0; index < scripts.length; ++index) {
+//                 let source = scripts[index].getAttribute('src')
+//                 if (source !== null && source.toLowerCase().indexOf(`/dist/${window.SmitStore.config.sdk.version}/sdk.js`.toLowerCase()) > -1) {
+//                     self = scripts[index];
 
-                    // Set API key identifier...
-                    const apiKey = SmitStore.getQueryParameter('api', source)
-                    if (apiKey !== null) {
-                        SmitStore.setApiKey(apiKey)
-                    } else {
-                        SmitStore.__error('Missing valid configuration "api"')
-                    }
-                }
-            }
+//                     // Set API key identifier...
+//                     const apiKey = SmitStore.getQueryParameter('api', source)
+//                     if (apiKey !== null) {
+//                         SmitStore.setApiKey(apiKey)
+//                     } else {
+//                         SmitStore.__error('Missing valid configuration "api"')
+//                     }
+//                 }
+//             }
 
-            // TODO: load frontend components
-        })
-    }
-})()
+//             // TODO: load frontend components
+//         })
+//     }
+// })()

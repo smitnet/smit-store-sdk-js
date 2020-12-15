@@ -2,8 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('core-js/modules/es.array.index-of');
-require('core-js/modules/es.object.keys');
 require('core-js/modules/es.regexp.constructor');
 require('core-js/modules/es.regexp.exec');
 require('core-js/modules/es.regexp.to-string');
@@ -219,7 +217,7 @@ function _createSuper(Derived) {
 }
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.12";
+var version = "1.0.13";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -688,35 +686,31 @@ var SmitStore = /*#__PURE__*/function () {
 var Build = function Build(config) {
   return new SmitStore(new Config(config));
 };
-
-(function () {
-  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-    var _SmitStore = window.SmitStore = _typeof(window.SmitStore) === Object && Object.keys(window.SmitStore).length !== 0 ? window.SmitStore : Build({}); // TODO: add cross browser support for `document loaded`
-
-
-    document.addEventListener('DOMContentLoaded', function (e) {
-      var self = null;
-      var scripts = document.getElementsByTagName('script');
-
-      for (var index = 0; index < scripts.length; ++index) {
-        var source = scripts[index].getAttribute('src');
-
-        if (source !== null && source.toLowerCase().indexOf("/dist/".concat(window.SmitStore.config.sdk.version, "/sdk.js").toLowerCase()) > -1) {
-          self = scripts[index]; // Set API key identifier...
-
-          var apiKey = _SmitStore.getQueryParameter('api', source);
-
-          if (apiKey !== null) {
-            _SmitStore.setApiKey(apiKey);
-          } else {
-            _SmitStore.__error('Missing valid configuration "api"');
-          }
-        }
-      } // TODO: load frontend components
-
-    });
-  }
-})();
+//     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+//         const SmitStore = window.SmitStore = (typeof window.SmitStore === Object && Object.keys(window.SmitStore).length !== 0)
+//             ? window.SmitStore
+//             : Build({})
+//         // TODO: add cross browser support for `document loaded`
+//         document.addEventListener('DOMContentLoaded', (e) => {
+//             let self = null;
+//             let scripts = document.getElementsByTagName('script')
+//             for (var index = 0; index < scripts.length; ++index) {
+//                 let source = scripts[index].getAttribute('src')
+//                 if (source !== null && source.toLowerCase().indexOf(`/dist/${window.SmitStore.config.sdk.version}/sdk.js`.toLowerCase()) > -1) {
+//                     self = scripts[index];
+//                     // Set API key identifier...
+//                     const apiKey = SmitStore.getQueryParameter('api', source)
+//                     if (apiKey !== null) {
+//                         SmitStore.setApiKey(apiKey)
+//                     } else {
+//                         SmitStore.__error('Missing valid configuration "api"')
+//                     }
+//                 }
+//             }
+//             // TODO: load frontend components
+//         })
+//     }
+// })()
 
 exports.Build = Build;
 exports.default = SmitStore;
