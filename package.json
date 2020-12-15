@@ -5,7 +5,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "src/index.js",
+  "main": "dist/index.cjs.js",
+  "browser": "dist/index.js",
   "module": "dist/index.mjs.js",
   "cjs:main": "dist/index.cjs.js",
   "scripts": {

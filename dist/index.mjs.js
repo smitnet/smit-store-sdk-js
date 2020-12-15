@@ -211,12 +211,13 @@ function _createSuper(Derived) {
 }
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.10";
+var version = "1.0.11";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
 };
-var main = "src/index.js";
+var main = "dist/index.cjs.js";
+var browser = "dist/index.js";
 var module = "dist/index.mjs.js";
 var scripts = {
 	test: "jest",
@@ -286,6 +287,7 @@ var pkg = {
 	description: description,
 	publishConfig: publishConfig,
 	main: main,
+	browser: browser,
 	module: module,
 	"cjs:main": "dist/index.cjs.js",
 	scripts: scripts,

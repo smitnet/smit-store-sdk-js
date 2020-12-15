@@ -53,7 +53,7 @@ export default [
         output: {
             name: 'SmitStore',
             exports: 'named',
-            file: `public/dist/${pkg.version}/sdk.js`,
+            file: pkg['browser'],
             format: 'umd',
         },
         plugins: [
@@ -62,7 +62,7 @@ export default [
             commonjs(),
             isProduction &&
             terser(),
-            isDevelopment && serve({ contentBase: ['public', 'examples'], open: true }),
+            isDevelopment && serve({ contentBase: ['examples'], open: true }),
             isDevelopment && livereload()
         ].filter(Boolean)
     },
@@ -78,7 +78,7 @@ export default [
     {
         ...config,
         output: {
-            file: pkg.module,
+            file: pkg['module'],
             format: 'es',
         },
         external: [...config.external, ...Object.keys(pkg.dependencies || {})]
