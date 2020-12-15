@@ -1,6 +1,6 @@
 {
   "name": "@smitnet/smit-store-sdk",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "SMIT.STORE JAVASCRIPT SDK",
   "publishConfig": {
     "access": "public"
