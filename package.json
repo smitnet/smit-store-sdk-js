@@ -2,9 +2,12 @@
   "name": "@smitnet/smit-store-sdk",
   "version": "1.0.10",
   "description": "SMIT.STORE JAVASCRIPT SDK",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "src/index.js",
-  "module": "dist/sdk.esm.js",
-  "cjs:main": "dist/sdk.cjs.js",
+  "module": "dist/index.mjs.js",
+  "cjs:main": "dist/index.cjs.js",
   "scripts": {
     "test": "jest",
     "rollup": "rollup -c",

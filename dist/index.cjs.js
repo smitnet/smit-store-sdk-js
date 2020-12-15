@@ -1,12 +1,20 @@
-import 'core-js/modules/es.array.index-of';
-import 'core-js/modules/es.object.keys';
-import 'core-js/modules/es.regexp.constructor';
-import 'core-js/modules/es.regexp.exec';
-import 'core-js/modules/es.regexp.to-string';
-import 'core-js/modules/es.string.replace';
-import 'core-js/modules/es.array.concat';
-import 'regenerator-runtime/runtime';
-import axios from 'axios';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+require('core-js/modules/es.array.index-of');
+require('core-js/modules/es.object.keys');
+require('core-js/modules/es.regexp.constructor');
+require('core-js/modules/es.regexp.exec');
+require('core-js/modules/es.regexp.to-string');
+require('core-js/modules/es.string.replace');
+require('core-js/modules/es.array.concat');
+require('regenerator-runtime/runtime');
+var axios = require('axios');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -211,10 +219,13 @@ function _createSuper(Derived) {
 }
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.8";
+var version = "1.0.10";
 var description = "SMIT.STORE JAVASCRIPT SDK";
+var publishConfig = {
+	access: "public"
+};
 var main = "src/index.js";
-var module = "dist/sdk.esm.js";
+var module$1 = "dist/index.mjs.js";
 var scripts = {
 	test: "jest",
 	rollup: "rollup -c",
@@ -281,9 +292,10 @@ var pkg = {
 	name: name,
 	version: version,
 	description: description,
+	publishConfig: publishConfig,
 	main: main,
-	module: module,
-	"cjs:main": "dist/sdk.cjs.js",
+	module: module$1,
+	"cjs:main": "dist/index.cjs.js",
 	scripts: scripts,
 	repository: repository,
 	keywords: keywords,
@@ -360,7 +372,7 @@ var RequestHelper = /*#__PURE__*/function () {
                 _context.prev = 0;
                 endpoint = url[0] === '/' ? url.substr(1) : url;
                 _context.next = 4;
-                return axios.get("".concat(this.config._baseUrl, "/").concat(endpoint));
+                return axios__default['default'].get("".concat(this.config._baseUrl, "/").concat(endpoint));
 
               case 4:
                 response = _context.sent;
@@ -407,7 +419,7 @@ var RequestHelper = /*#__PURE__*/function () {
                 _context2.prev = 0;
                 endpoint = url[0] === '/' ? url.substr(1) : url;
                 _context2.next = 4;
-                return axios.post("".concat(this.config._baseUrl, "/").concat(endpoint), data);
+                return axios__default['default'].post("".concat(this.config._baseUrl, "/").concat(endpoint), data);
 
               case 4:
                 response = _context2.sent;
@@ -704,5 +716,5 @@ var Build = function Build(config) {
   }
 })();
 
-export default SmitStore;
-export { Build };
+exports.Build = Build;
+exports.default = SmitStore;
