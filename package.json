@@ -3,6 +3,8 @@
   "version": "1.0.8",
   "description": "SMIT.STORE JAVASCRIPT SDK",
   "main": "src/index.js",
+  "module": "dist/sdk.esm.js",
+  "cjs:main": "dist/sdk.cjs.js",
   "scripts": {
     "test": "jest",
     "rollup": "rollup -c",
