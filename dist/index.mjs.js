@@ -1,22 +1,16 @@
-import 'core-js/modules/es.regexp.constructor';
-import 'core-js/modules/es.regexp.exec';
-import 'core-js/modules/es.regexp.to-string';
-import 'core-js/modules/es.string.replace';
 import _classCallCheck from '@babel/runtime/helpers/classCallCheck';
 import _createClass from '@babel/runtime/helpers/createClass';
-import 'core-js/modules/es.array.concat';
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import _inherits from '@babel/runtime/helpers/inherits';
 import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstructorReturn';
 import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
 import _typeof from '@babel/runtime/helpers/typeof';
 import _regeneratorRuntime from '@babel/runtime/regenerator';
-import 'regenerator-runtime/runtime';
 import _asyncToGenerator from '@babel/runtime/helpers/asyncToGenerator';
 import axios from 'axios';
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.16";
+var version = "1.0.17";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"

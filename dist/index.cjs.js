@@ -2,20 +2,14 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('core-js/modules/es.regexp.constructor');
-require('core-js/modules/es.regexp.exec');
-require('core-js/modules/es.regexp.to-string');
-require('core-js/modules/es.string.replace');
 var _classCallCheck = require('@babel/runtime/helpers/classCallCheck');
 var _createClass = require('@babel/runtime/helpers/createClass');
-require('core-js/modules/es.array.concat');
 var _defineProperty = require('@babel/runtime/helpers/defineProperty');
 var _inherits = require('@babel/runtime/helpers/inherits');
 var _possibleConstructorReturn = require('@babel/runtime/helpers/possibleConstructorReturn');
 var _getPrototypeOf = require('@babel/runtime/helpers/getPrototypeOf');
 var _typeof = require('@babel/runtime/helpers/typeof');
 var _regeneratorRuntime = require('@babel/runtime/regenerator');
-require('regenerator-runtime/runtime');
 var _asyncToGenerator = require('@babel/runtime/helpers/asyncToGenerator');
 var axios = require('axios');
 
@@ -33,7 +27,7 @@ var _asyncToGenerator__default = /*#__PURE__*/_interopDefaultLegacy(_asyncToGene
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.16";
+var version = "1.0.17";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"

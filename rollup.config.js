@@ -14,14 +14,14 @@ const isProduction = NODE_ENV === 'production'
 const isDevelopment = NODE_ENV === 'development' && process.env.SERVE === 'true'
 
 const moduleExternals = [
-    'regenerator-runtime/runtime',
-    'core-js/modules/es.regexp.constructor',
-    'core-js/modules/es.regexp.exec',
-    'core-js/modules/es.regexp.to-string',
-    'core-js/modules/es.string.replace',
+    // 'regenerator-runtime/runtime',
+    // 'core-js/modules/es.regexp.constructor',
+    // 'core-js/modules/es.regexp.exec',
+    // 'core-js/modules/es.regexp.to-string',
+    // 'core-js/modules/es.string.replace',
     '@babel/runtime/helpers/classCallCheck',
     '@babel/runtime/helpers/createClass',
-    'core-js/modules/es.array.concat',
+    // 'core-js/modules/es.array.concat',
     '@babel/runtime/helpers/defineProperty',
     '@babel/runtime/helpers/inherits',
     '@babel/runtime/helpers/possibleConstructorReturn',
@@ -47,15 +47,6 @@ const config = {
             presets: [
                 [
                     '@babel/preset-env',
-                    {
-                        corejs: 3,
-                        modules: false,
-                        useBuiltIns: 'usage',
-                        targets: {
-                            node: 'current',
-                            ie: '11',
-                        },
-                    },
                 ],
             ],
             plugins: [
@@ -75,8 +66,7 @@ export default [
             name: 'SmitStore',
             exports: 'named',
             file: pkg['browser'],
-            format: 'umd',
-            globals: ['axios']
+            format: 'umd'
         },
         plugins: [
             ...config.plugins,
