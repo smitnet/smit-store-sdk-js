@@ -8,210 +8,8 @@
 
   var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
-  function _typeof(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
-  }
-
-  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-    try {
-      var info = gen[key](arg);
-      var value = info.value;
-    } catch (error) {
-      reject(error);
-      return;
-    }
-
-    if (info.done) {
-      resolve(value);
-    } else {
-      Promise.resolve(value).then(_next, _throw);
-    }
-  }
-
-  function _asyncToGenerator(fn) {
-    return function () {
-      var self = this,
-          args = arguments;
-      return new Promise(function (resolve, reject) {
-        var gen = fn.apply(self, args);
-
-        function _next(value) {
-          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-        }
-
-        function _throw(err) {
-          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-        }
-
-        _next(undefined);
-      });
-    };
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-
-    return _setPrototypeOf(o, p);
-  }
-
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
-    try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-          result;
-
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-
   var name = "@smitnet/smit-store-sdk";
-  var version = "1.0.20";
+  var version = "1.0.21";
   var description = "SMIT.STORE JAVASCRIPT SDK";
   var publishConfig = {
   	access: "public"
@@ -253,6 +51,7 @@
   	"babel-core": "^6.26.3",
   	"babel-loader": "^8.2.2",
   	"babel-plugin-inline-json-import": "^0.3.2",
+  	"babel-plugin-transform-class-properties": "^6.24.1",
   	"babel-polyfill": "^6.26.0",
   	"babel-preset-env": "^1.7.0",
   	cypress: "^6.1.0",
@@ -304,274 +103,167 @@
   	directories: directories
   };
 
-  var Config = function Config(options) {
-    _classCallCheck(this, Config);
+  class Config {
+    constructor(options) {
+      const {
+        apiKey,
+        hostname,
+        protocol,
+        currency,
+        language,
+        version,
+        headers,
+        addCartClass,
+        throwExceptions,
+        isDebug
+      } = options; // request
 
-    var apiKey = options.apiKey,
-        hostname = options.hostname,
-        protocol = options.protocol,
-        currency = options.currency,
-        language = options.language,
-        version = options.version,
-        headers = options.headers,
-        addCartClass = options.addCartClass,
-        throwExceptions = options.throwExceptions,
-        isDebug = options.isDebug; // request
+      this.apiKey = apiKey || null;
+      this.headers = headers || {};
+      this.protocol = protocol || 'https';
+      this.hostname = hostname || 'api.smit.store';
+      this.version = version || 'v1';
+      this.resource = null; // localization
 
-    this.apiKey = apiKey || null;
-    this.headers = headers || {};
-    this.protocol = protocol || 'https';
-    this.hostname = hostname || 'api.smit.store';
-    this.version = version || 'v1';
-    this.resource = null; // localization
+      this.currency = currency || 'EUR';
+      this.language = language || 'nl'; // browser
 
-    this.currency = currency || 'EUR';
-    this.language = language || 'nl'; // browser
+      this.addCartClass = addCartClass || 'add-cart'; // metadata
 
-    this.addCartClass = addCartClass || 'add-cart'; // metadata
+      this.sdk = {
+        version: pkg.version,
+        language: 'JS',
+        environment: 'none',
+        exceptions: this.throwExceptions || true,
+        isDebug: this.isDebug || false
+      };
 
-    this.sdk = {
-      version: pkg.version,
-      language: 'JS',
-      environment: 'none',
-      exceptions: this.throwExceptions || true,
-      isDebug: this.isDebug || false
-    };
+      if (!this.protocol) {
+        throw new Error('Missing "protocol" from configuration options');
+      }
 
-    if (!this.protocol) {
-      throw new Error('Missing "protocol" from configuration options');
+      if (!this.hostname) {
+        throw new Error('Missing "hostname" from configuration options');
+      }
+
+      this._baseUrl = `${this.protocol}://${this.hostname}/api/${this.version}`;
     }
 
-    if (!this.hostname) {
-      throw new Error('Missing "hostname" from configuration options');
-    }
+  }
 
-    this._baseUrl = "".concat(this.protocol, "://").concat(this.hostname, "/api/").concat(this.version);
-  };
-
-  var RequestHelper = /*#__PURE__*/function () {
-    function RequestHelper(config) {
-      _classCallCheck(this, RequestHelper);
-
+  class RequestHelper {
+    constructor(config) {
       this.config = config;
     }
 
-    _createClass(RequestHelper, [{
-      key: "get",
-      value: function () {
-        var _get = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
-          var endpoint, response;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.prev = 0;
-                  endpoint = url[0] === '/' ? url.substr(1) : url;
-                  _context.next = 4;
-                  return axios__default['default'].get("".concat(this.config._baseUrl, "/").concat(endpoint));
+    async get(url) {
+      try {
+        const endpoint = url[0] === '/' ? url.substr(1) : url;
+        const response = await axios__default['default'].get(`${this.config._baseUrl}/${endpoint}`);
 
-                case 4:
-                  response = _context.sent;
-
-                  if (!(response.status >= 200 && response.status <= 204)) {
-                    _context.next = 7;
-                    break;
-                  }
-
-                  return _context.abrupt("return", response.data);
-
-                case 7:
-                  _context.next = 12;
-                  break;
-
-                case 9:
-                  _context.prev = 9;
-                  _context.t0 = _context["catch"](0);
-                  throw Error(_context.t0);
-
-                case 12:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee, this, [[0, 9]]);
-        }));
-
-        function get(_x) {
-          return _get.apply(this, arguments);
+        if (response.status >= 200 && response.status <= 204) {
+          return response.data;
         }
+      } catch (err) {
+        throw Error(err);
+      }
+    }
 
-        return get;
-      }()
-    }, {
-      key: "post",
-      value: function () {
-        var _post = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url, data) {
-          var endpoint, response, results;
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.prev = 0;
-                  endpoint = url[0] === '/' ? url.substr(1) : url;
-                  _context2.next = 4;
-                  return axios__default['default'].post("".concat(this.config._baseUrl, "/").concat(endpoint), data);
+    async post(url, data) {
+      try {
+        const endpoint = url[0] === '/' ? url.substr(1) : url;
+        const response = await axios__default['default'].post(`${this.config._baseUrl}/${endpoint}`, data);
 
-                case 4:
-                  response = _context2.sent;
+        if (response.status >= 200 && response.status <= 204) {
+          let results = null;
 
-                  if (!(response.status >= 200 && response.status <= 204)) {
-                    _context2.next = 9;
-                    break;
-                  }
+          if (typeof response.data === Object && response.data.hasOwnProperty('data')) {
+            results = response.data.data;
+          } else {
+            results = response.data;
+          }
 
-                  results = null;
-
-                  if (_typeof(response.data) === Object && response.data.hasOwnProperty('data')) {
-                    results = response.data.data;
-                  } else {
-                    results = response.data;
-                  }
-
-                  return _context2.abrupt("return", results);
-
-                case 9:
-                  _context2.next = 14;
-                  break;
-
-                case 11:
-                  _context2.prev = 11;
-                  _context2.t0 = _context2["catch"](0);
-                  throw Error(_context2.t0);
-
-                case 14:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this, [[0, 11]]);
-        }));
-
-        function post(_x2, _x3) {
-          return _post.apply(this, arguments);
+          return results;
         }
+      } catch (err) {
+        throw Error(err);
+      }
+    }
 
-        return post;
-      }()
-    }]);
+  }
 
-    return RequestHelper;
-  }();
-
-  var BaseResource = /*#__PURE__*/function () {
-    function BaseResource(config) {
-      _classCallCheck(this, BaseResource);
-
+  class BaseResource {
+    constructor(config) {
       this.request = new RequestHelper(config);
       this.config = config;
       this.resource = null;
       this.metadata = {};
     }
 
-    _createClass(BaseResource, [{
-      key: "Metadata",
-      value: function Metadata() {
-        this.Meta();
-      }
-    }, {
-      key: "Meta",
-      value: function Meta() {
-        return this.metadata;
-      }
-    }, {
-      key: "All",
-      value: function All() {
-        var _this = this;
+    Metadata() {
+      this.Meta();
+    }
 
-        return this.request.get(this.resource).then(function (response) {
-          if (_typeof(response.data) === 'object') {
-            var json = response.data;
+    Meta() {
+      return this.metadata;
+    }
 
-            if (json.hasOwnProperty('meta')) {
-              _this.metadata = json.meta;
-            }
+    All() {
+      return this.request.get(this.resource).then(response => {
+        if (typeof response.data === 'object') {
+          const json = response.data;
 
-            return json.hasOwnProperty('data') ? json.data : json;
+          if (json.hasOwnProperty('meta')) {
+            this.metadata = json.meta;
           }
 
-          return response.data;
-        });
-      }
-    }, {
-      key: "Get",
-      value: function Get() {
-        var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-
-        if (id === undefined) {
-          throw Error('Missing "id" from request');
+          return json.hasOwnProperty('data') ? json.data : json;
         }
 
-        return this.request.get("".concat(this.resource, "/").concat(id)).then(function (response) {
-          return _typeof(response.data) === 'object' && response.data.hasOwnProperty('data') ? response.data.data : response.data;
-        });
-      }
-    }]);
-
-    return BaseResource;
-  }();
-
-  var SessionResource = /*#__PURE__*/function (_BaseResource) {
-    _inherits(SessionResource, _BaseResource);
-
-    var _super = _createSuper(SessionResource);
-
-    function SessionResource(config) {
-      var _this;
-
-      _classCallCheck(this, SessionResource);
-
-      _this = _super.call(this, config);
-      _this.resource = 'session';
-      return _this;
+        return response.data;
+      });
     }
 
-    _createClass(SessionResource, [{
-      key: "Guest",
-      value: function Guest() {
-        return this.request.get(this.resource);
+    Get(id = undefined) {
+      if (id === undefined) {
+        throw Error('Missing "id" from request');
       }
-    }, {
-      key: "Login",
-      value: function Login(username, password) {
-        return this.request.post(this.resource, _objectSpread2(_objectSpread2({}, username), password));
-      }
-    }]);
 
-    return SessionResource;
-  }(BaseResource);
-
-  var ProductResource = /*#__PURE__*/function (_BaseResource) {
-    _inherits(ProductResource, _BaseResource);
-
-    var _super = _createSuper(ProductResource);
-
-    function ProductResource(config) {
-      var _this;
-
-      _classCallCheck(this, ProductResource);
-
-      _this = _super.call(this, config);
-      _this.resource = 'products';
-      return _this;
+      return this.request.get(`${this.resource}/${id}`).then(response => {
+        return typeof response.data === 'object' && response.data.hasOwnProperty('data') ? response.data.data : response.data;
+      });
     }
 
-    return ProductResource;
-  }(BaseResource);
+  }
 
-  var SmitStore = /*#__PURE__*/function () {
-    function SmitStore(config) {
-      _classCallCheck(this, SmitStore);
+  class SessionResource extends BaseResource {
+    constructor(config) {
+      super(config);
+      this.resource = 'session';
+    }
 
+    Guest() {
+      return this.request.get(this.resource);
+    }
+
+    Login(username, password) {
+      return this.request.post(this.resource, { ...username,
+        ...password
+      });
+    }
+
+  }
+
+  class ProductResource extends BaseResource {
+    constructor(config) {
+      super(config);
+      this.resource = 'products';
+    }
+
+  }
+
+  class SmitStore {
+    constructor(config) {
       this.config = config;
       this.Sessions = new SessionResource(config);
       this.Products = new ProductResource(config);
@@ -594,94 +286,74 @@
      */
 
 
-    _createClass(SmitStore, [{
-      key: "__debug",
-      value: function __debug() {
-        if (this.config.sdk.isDebug) {
-          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-          }
+    __debug(...args) {
+      if (this.config.sdk.isDebug) {
+        console.debug(args);
+      }
+    }
+    /**
+     * TODO: add exception toggle in configuraton
+     * @param {*} msg
+     */
 
-          console.debug(args);
+
+    __error(msg) {
+      if (this.config.sdk.exceptions) {
+        throw Error(msg);
+      }
+    }
+
+    setApiKey(apiKey) {
+      // TODO: invalid api token should throw error
+      this.config.sdk.apiKey = apiKey;
+    }
+
+    getQueryParameter(name, url) {
+      if (!url) url = location.href;
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      const rs = "[\\?&]" + name + "=([^&#]*)";
+      const re = new RegExp(rs);
+      const r = re.exec(url);
+      return r == null ? null : r[1];
+    }
+    /**
+     * TODO: This MUST be initiated upon browser identification.
+     */
+
+
+    initBrowser() {
+      const products = document.getElementsByClassName(this.config.addCartClass);
+
+      if (products.length) {
+        for (let index = products.length - 1; index >= 0; index -= 1) {
+          const product = products[index];
+          const productData = product.dataset; // Add to cart handler by listing for click event
+
+          product.addEventListener('click', evt => {
+            if (evt.isTrusted) {
+              evt.preventDefault();
+
+              this.__debug('add product to cart:', productData.itemId);
+            }
+          });
+
+          if (!productData.itemId) {
+            this.__error('Missing required "data-item-id" attribute');
+          } else if (!productData.itemName) {
+            this.__error('Missing required "data-item-name" attribute');
+          } else if (!productData.itemPrice) {
+            this.__error('Missing required "data-item-price" attribute');
+          } else if (!productData.itemUrl) {
+            this.__error('Missing required "data-item-url" attribute');
+          } // TODO: send indexed products to API for indexing
+
         }
       }
-      /**
-       * TODO: add exception toggle in configuraton
-       * @param {*} msg
-       */
+    }
 
-    }, {
-      key: "__error",
-      value: function __error(msg) {
-        if (this.config.sdk.exceptions) {
-          throw Error(msg);
-        }
-      }
-    }, {
-      key: "setApiKey",
-      value: function setApiKey(apiKey) {
-        // TODO: invalid api token should throw error
-        this.config.sdk.apiKey = apiKey;
-      }
-    }, {
-      key: "getQueryParameter",
-      value: function getQueryParameter(name, url) {
-        if (!url) url = location.href;
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var rs = "[\\?&]" + name + "=([^&#]*)";
-        var re = new RegExp(rs);
-        var r = re.exec(url);
-        return r == null ? null : r[1];
-      }
-      /**
-       * TODO: This MUST be initiated upon browser identification.
-       */
+  }
 
-    }, {
-      key: "initBrowser",
-      value: function initBrowser() {
-        var _this = this;
-
-        var products = document.getElementsByClassName(this.config.addCartClass);
-
-        if (products.length) {
-          var _loop = function _loop(index) {
-            var product = products[index];
-            var productData = product.dataset; // Add to cart handler by listing for click event
-
-            product.addEventListener('click', function (evt) {
-              if (evt.isTrusted) {
-                evt.preventDefault();
-
-                _this.__debug('add product to cart:', productData.itemId);
-              }
-            });
-
-            if (!productData.itemId) {
-              _this.__error('Missing required "data-item-id" attribute');
-            } else if (!productData.itemName) {
-              _this.__error('Missing required "data-item-name" attribute');
-            } else if (!productData.itemPrice) {
-              _this.__error('Missing required "data-item-price" attribute');
-            } else if (!productData.itemUrl) {
-              _this.__error('Missing required "data-item-url" attribute');
-            } // TODO: send indexed products to API for indexing
-
-          };
-
-          for (var index = products.length - 1; index >= 0; index -= 1) {
-            _loop(index);
-          }
-        }
-      }
-    }]);
-
-    return SmitStore;
-  }();
-
-  var Build = function Build(config) {
-    return new SmitStore(new Config(config));
-  };
+  const Build = config => new SmitStore(new Config(config));
   //     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   //         const SmitStore = window.SmitStore = (typeof window.SmitStore === Object && Object.keys(window.SmitStore).length !== 0)
   //             ? window.SmitStore

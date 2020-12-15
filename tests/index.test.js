@@ -1,5 +1,3 @@
-import 'regenerator-runtime/runtime'
-
 const { default: Config } = require("../src/config")
 const { default: SmitStore } = require("../src/index")
 

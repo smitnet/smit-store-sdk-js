@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime'
 import axios from 'axios'
 import Sessions from '../mocks/sessions/session.mock'
 import GuestData from '../mocks/sessions/guest.json'

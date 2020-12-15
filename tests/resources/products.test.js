@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime'
 import axios from 'axios';
 import Products from '../mocks/products/product.mock';
 import ProductsData from '../mocks/products/products.json';
