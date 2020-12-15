@@ -1,6 +1,6 @@
 {
   "name": "@smitnet/smit-store-sdk",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "SMIT.STORE JAVASCRIPT SDK",
   "main": "src/index.js",
   "scripts": {
