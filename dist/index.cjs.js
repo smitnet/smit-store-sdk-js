@@ -33,7 +33,7 @@ var _asyncToGenerator__default = /*#__PURE__*/_interopDefaultLegacy(_asyncToGene
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.15";
+var version = "1.0.16";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -98,7 +98,8 @@ var devDependencies = {
 	"rollup-plugin-terser": "^7.0.2"
 };
 var dependencies = {
-	axios: "^0.21.0"
+	axios: "^0.21.0",
+	"core-js": "^3.8.1"
 };
 var directories = {
 	example: "examples",
