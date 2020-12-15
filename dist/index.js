@@ -211,7 +211,7 @@
   }
 
   var name = "@smitnet/smit-store-sdk";
-  var version = "1.0.19";
+  var version = "1.0.20";
   var description = "SMIT.STORE JAVASCRIPT SDK";
   var publishConfig = {
   	access: "public"

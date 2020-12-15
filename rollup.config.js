@@ -14,7 +14,7 @@ const isProduction = NODE_ENV === 'production'
 const isDevelopment = NODE_ENV === 'development' && process.env.SERVE === 'true'
 
 const moduleExternals = [
-    // 'regenerator-runtime/runtime',
+    'regenerator-runtime/runtime',
     // 'core-js/modules/es.regexp.constructor',
     // 'core-js/modules/es.regexp.exec',
     // 'core-js/modules/es.regexp.to-string',
