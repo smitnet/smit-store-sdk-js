@@ -12,5 +12,13 @@
         "sourceType": "module"
     },
     "rules": {
-    }
+    },
+    "overrides": [
+        {
+            "files": ["tests/*.spec.js", "tests/*.test.js"], // Or *.test.js
+            "rules": {
+                "require-jsdoc": "off"
+            }
+        }
+    ]
 }

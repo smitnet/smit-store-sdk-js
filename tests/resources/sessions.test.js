@@ -1,28 +1,37 @@
-import axios from 'axios'
-import Sessions from '../mocks/sessions/session.mock'
-import GuestData from '../mocks/sessions/guest.json'
-import UserData from '../mocks/sessions/user.json'
+const jwt = require('jsonwebtoken');
+const SmitStore = require('../../dist/index.cjs').Build;
 
-jest.mock('axios')
+const sdk = SmitStore({
+  apiKey: 'test_123',
+});
 
 describe('session resource', () => {
-    test('obtain guest session token', () => {
-        const response = GuestData
+  test('obtain guest session token', () => {
+    return sdk.Sessions.Guest().then((data) => {
+      expect(data.split('.').length).toEqual(3);
+    });
+  });
 
-        axios.get.mockResolvedValue(response)
+  test('it can refresh guest session token', () => {
+    return sdk.Sessions.Guest().then((oldSession) => {
+      sdk.Sessions.Refresh(oldSession).then((newSession) => {
+        expect(jwt.decode(oldSession).jti).toEqual(jwt.decode(newSession).jti);
+      });
+    });
+  });
 
-        return Sessions.Guest().then((data) => {
-            expect(response.data).toEqual(data)
-        })
-    })
+  // test('it can logout guest session token', () => {
+  //   return sdk.Sessions.Guest().then((token) => {
+  //     sdk.Sessions.Logout(token).then((data) => {
+  //       // TODO: expect 200 ok status code
+  //     });
+  //   });
+  // });
 
-    test('obtain authenticated user session token', () => {
-        const response = UserData
-
-        axios.get.mockResolvedValue(response)
-
-        return Sessions.Login('support@smit.net', 'password').then((data) => {
-            expect(response.data).toEqual(data)
-        })
-    })
-})
+  // test('obtain authenticated user session token', () => {
+  //   return sdk.Sessions.Login('support@smit.net', 'password').then((data) => {
+  //     // expect(data).toEqual(data);
+  //     console.log(data);
+  //   });
+  // });
+});

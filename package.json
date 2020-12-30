@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest",
     "rollup": "rollup -c",
-    "build": "npm run test && npm run rollup",
+    "build": "npm run rollup && npm run test",
     "start": "SERVE=true rollup -c -w",
     "watch": "npm run start",
     "lint": "eslint --ext .js src"
@@ -68,7 +68,10 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "core-js": "^3.8.1"
+    "core-js": "^3.8.1",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "node-localstorage": "^2.1.6"
   },
   "directories": {
     "example": "examples",

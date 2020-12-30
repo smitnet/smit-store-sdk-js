@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.21";
+var version = "1.0.22";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -12,7 +12,7 @@ var module = "dist/index.mjs.js";
 var scripts = {
 	test: "jest",
 	rollup: "rollup -c",
-	build: "npm run test && npm run rollup",
+	build: "npm run rollup && npm run test",
 	start: "SERVE=true rollup -c -w",
 	watch: "npm run start",
 	lint: "eslint --ext .js src"
@@ -68,7 +68,10 @@ var devDependencies = {
 };
 var dependencies = {
 	axios: "^0.21.0",
-	"core-js": "^3.8.1"
+	"core-js": "^3.8.1",
+	"js-cookie": "^2.2.1",
+	jsonwebtoken: "^8.5.1",
+	"node-localstorage": "^2.1.6"
 };
 var directories = {
 	example: "examples",
@@ -95,9 +98,37 @@ var pkg = {
 	directories: directories
 };
 
+const {
+  LocalStorage
+} = require('node-localstorage');
+
+class LocalStorageAdapter {
+  constructor() {
+    if (typeof localStorage === 'undefined' || localStorage === null) {
+      this.localStorage = new LocalStorage('./localStorage');
+    } else {
+      this.localStorage = window.localStorage;
+    }
+  }
+
+  set(key, value) {
+    return this.localStorage.setItem(key, value);
+  }
+
+  get(key) {
+    return this.localStorage.getItem(key);
+  }
+
+  delete(key) {
+    return this.localStorage.removeItem(key);
+  }
+
+}
+
 class Config {
   constructor(options) {
     const {
+      storage,
       apiKey,
       hostname,
       protocol,
@@ -108,7 +139,9 @@ class Config {
       addCartClass,
       throwExceptions,
       isDebug
-    } = options; // request
+    } = options; // storage
+
+    this.storage = storage || new LocalStorageAdapter(); // request
 
     this.apiKey = apiKey || null;
     this.headers = headers || {};
@@ -126,8 +159,8 @@ class Config {
       version: pkg.version,
       language: 'JS',
       environment: 'none',
-      exceptions: this.throwExceptions || true,
-      isDebug: this.isDebug || false
+      exceptions: throwExceptions || true,
+      isDebug: isDebug || false
     };
 
     if (!this.protocol) {
@@ -138,7 +171,7 @@ class Config {
       throw new Error('Missing "hostname" from configuration options');
     }
 
-    this._baseUrl = `${this.protocol}://${this.hostname}/api/${this.version}`;
+    this.requestBaseUrl = `${this.protocol}://${this.hostname}/api/${this.version}`;
   }
 
 }
@@ -148,10 +181,10 @@ class RequestHelper {
     this.config = config;
   }
 
-  async get(url) {
+  async get(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
-      const response = await axios.get(`${this.config._baseUrl}/${endpoint}`);
+      const response = await axios.get(`${this.config.requestBaseUrl}/${endpoint}`);
 
       if (response.status >= 200 && response.status <= 204) {
         return response.data;
@@ -161,15 +194,63 @@ class RequestHelper {
     }
   }
 
-  async post(url, data) {
+  async post(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
-      const response = await axios.post(`${this.config._baseUrl}/${endpoint}`, data);
+      const response = await axios.post(`${this.config.requestBaseUrl}/${endpoint}`, data, {
+        headers
+      });
 
       if (response.status >= 200 && response.status <= 204) {
         let results = null;
 
-        if (typeof response.data === Object && response.data.hasOwnProperty('data')) {
+        if (typeof response.data === 'object' && response.data.hasOwnProperty('data')) {
+          results = response.data.data;
+        } else {
+          results = response.data;
+        }
+
+        return results;
+      }
+    } catch (err) {
+      throw Error(err);
+    }
+  }
+
+  async put(url, data, headers = undefined) {
+    try {
+      const endpoint = url[0] === '/' ? url.substr(1) : url;
+      const response = await axios.put(`${this.config.requestBaseUrl}/${endpoint}`, data, {
+        headers
+      });
+
+      if (response.status >= 200 && response.status <= 204) {
+        let results = null;
+
+        if (typeof response.data === 'object' && response.data.hasOwnProperty('data')) {
+          results = response.data.data;
+        } else {
+          results = response.data;
+        }
+
+        return results;
+      }
+    } catch (err) {
+      throw Error(err);
+    }
+  }
+
+  async delete(url, data, headers = undefined) {
+    try {
+      const endpoint = url[0] === '/' ? url.substr(1) : url;
+      const response = await axios.delete(`${this.config.requestBaseUrl}/${endpoint}`, data, {
+        headers
+      });
+
+      if (response.status >= 200 && response.status <= 204) {
+        let results = null;
+
+        if (typeof response.data === 'object' && response.data.hasOwnProperty('data')) {
           results = response.data.data;
         } else {
           results = response.data;
@@ -200,7 +281,98 @@ class BaseResource {
     return this.metadata;
   }
 
-  All() {
+}
+
+class CartResource extends BaseResource {
+  constructor(config) {
+    super(config);
+    this.resource = 'cart';
+  }
+
+  Get() {
+    return this.request.get(this.resource);
+  }
+
+  Update() {
+    return this.request.put(this.resource);
+  }
+
+  Clear() {
+    // TODO: ensure that user has confirmed clearing their cart
+    return this.request.delete(this.resource);
+  }
+
+  Convert() {
+    // TODO: ensure request was successful
+    // TODO: clear cart remotely by calling internal function
+    // TODO: get current cart (this should be a new cart)
+    return this.request.post(this.resource);
+  }
+
+}
+
+class SessionResource extends BaseResource {
+  constructor(config) {
+    super(config); // TODO: decide usage `cookie storage` or `localStorage` and override
+
+    this.resource = 'session';
+  }
+
+  Guest() {
+    return this.request.post(this.resource).then(response => {
+      this.config.storage.set('access_token', response);
+      return response;
+    });
+  }
+
+  Refresh(token = undefined) {
+
+    return this.request.post(`${this.resource}/refresh`, null, {
+      Authorization: `Bearer ${token}`
+    }).then(response => {
+      this.config.storage.set('access_token', response);
+      return response;
+    });
+  }
+
+  Login(username = undefined, password = undefined) {
+
+    return this.request.post(this.resource, {
+      username,
+      password
+    }).then(response => {
+      this.config.storage.set('access_token', response);
+      return response;
+    });
+  }
+
+  Logout(token = undefined) {
+
+    return this.request.post(`${this.resource}/logout`, null, {
+      Authorization: `Bearer ${token}`
+    });
+  }
+
+}
+
+class CrudResource extends BaseResource {
+  constructor(config) {
+    super(config);
+    this.request = new RequestHelper(config);
+    this.config = config;
+    this.resource = null;
+    this.metadata = {};
+  }
+
+  Metadata() {
+    this.Meta();
+  }
+
+  Meta() {
+    return this.metadata;
+  }
+
+  All(args = undefined) {
     return this.request.get(this.resource).then(response => {
       if (typeof response.data === 'object') {
         const json = response.data;
@@ -228,25 +400,7 @@ class BaseResource {
 
 }
 
-class SessionResource extends BaseResource {
-  constructor(config) {
-    super(config);
-    this.resource = 'session';
-  }
-
-  Guest() {
-    return this.request.get(this.resource);
-  }
-
-  Login(username, password) {
-    return this.request.post(this.resource, { ...username,
-      ...password
-    });
-  }
-
-}
-
-class ProductResource extends BaseResource {
+class ProductResource extends CrudResource {
   constructor(config) {
     super(config);
     this.resource = 'products';
@@ -254,66 +408,8 @@ class ProductResource extends BaseResource {
 
 }
 
-class SmitStore {
-  constructor(config) {
-    this.config = config;
-    this.Sessions = new SessionResource(config);
-    this.Products = new ProductResource(config);
-
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-      this.config.sdk.environment = 'browser';
-
-      this.__debug('environment', 'browser');
-
-      return this.initBrowser();
-    } else {
-      this.config.sdk.environment = 'node';
-
-      this.__debug('environment', 'node');
-    }
-  }
-  /**
-   * TODO: add debug toggle in configuration
-   * @param  {...any} args
-   */
-
-
-  __debug(...args) {
-    if (this.config.sdk.isDebug) {
-      console.debug(args);
-    }
-  }
-  /**
-   * TODO: add exception toggle in configuraton
-   * @param {*} msg
-   */
-
-
-  __error(msg) {
-    if (this.config.sdk.exceptions) {
-      throw Error(msg);
-    }
-  }
-
-  setApiKey(apiKey) {
-    // TODO: invalid api token should throw error
-    this.config.sdk.apiKey = apiKey;
-  }
-
-  getQueryParameter(name, url) {
-    if (!url) url = location.href;
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    const rs = "[\\?&]" + name + "=([^&#]*)";
-    const re = new RegExp(rs);
-    const r = re.exec(url);
-    return r == null ? null : r[1];
-  }
-  /**
-   * TODO: This MUST be initiated upon browser identification.
-   */
-
-
-  initBrowser() {
+class Browser {
+  Init() {
     const products = document.getElementsByClassName(this.config.addCartClass);
 
     if (products.length) {
@@ -324,19 +420,18 @@ class SmitStore {
         product.addEventListener('click', evt => {
           if (evt.isTrusted) {
             evt.preventDefault();
-
-            this.__debug('add product to cart:', productData.itemId);
+            this.debug('add product to cart:', productData.itemId);
           }
         });
 
         if (!productData.itemId) {
-          this.__error('Missing required "data-item-id" attribute');
+          this.error('Missing required "data-item-id" attribute');
         } else if (!productData.itemName) {
-          this.__error('Missing required "data-item-name" attribute');
+          this.error('Missing required "data-item-name" attribute');
         } else if (!productData.itemPrice) {
-          this.__error('Missing required "data-item-price" attribute');
+          this.error('Missing required "data-item-price" attribute');
         } else if (!productData.itemUrl) {
-          this.__error('Missing required "data-item-url" attribute');
+          this.error('Missing required "data-item-url" attribute');
         } // TODO: send indexed products to API for indexing
 
       }
@@ -345,32 +440,54 @@ class SmitStore {
 
 }
 
+class SmitStore {
+  constructor(config) {
+    this.config = config;
+    this.Carts = new CartResource(config);
+    this.Sessions = new SessionResource(config);
+    this.Products = new ProductResource(config); // TODO: add `...` resource
+
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      this.config.sdk.environment = 'browser';
+      return new Browser(config);
+    }
+
+    this.config.sdk.environment = 'node';
+  }
+  /**
+   * Once `debug` is enabled, we'll allow `debug` console logs.
+   *
+   * @param  {...any} args
+   */
+
+
+  debug(...args) {
+    if (this.config.sdk.isDebug) {
+      console.debug(args); // eslint-disable-line
+    }
+  }
+  /**
+   * This will throw Exceptions if preferred.
+   *
+   * @param {*} msg
+   */
+
+
+  error(msg) {
+    if (this.config.sdk.exceptions) {
+      throw Error(msg);
+    }
+  }
+
+  setApiKey(apiKey) {
+    // TODO: invalid api token should throw error
+    this.config.sdk.apiKey = apiKey;
+  }
+
+}
+
 const Build = config => new SmitStore(new Config(config));
-//     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-//         const SmitStore = window.SmitStore = (typeof window.SmitStore === Object && Object.keys(window.SmitStore).length !== 0)
-//             ? window.SmitStore
-//             : Build({})
-//         // TODO: add cross browser support for `document loaded`
-//         document.addEventListener('DOMContentLoaded', (e) => {
-//             let self = null;
-//             let scripts = document.getElementsByTagName('script')
-//             for (var index = 0; index < scripts.length; ++index) {
-//                 let source = scripts[index].getAttribute('src')
-//                 if (source !== null && source.toLowerCase().indexOf(`/dist/${window.SmitStore.config.sdk.version}/sdk.js`.toLowerCase()) > -1) {
-//                     self = scripts[index];
-//                     // Set API key identifier...
-//                     const apiKey = SmitStore.getQueryParameter('api', source)
-//                     if (apiKey !== null) {
-//                         SmitStore.setApiKey(apiKey)
-//                     } else {
-//                         SmitStore.__error('Missing valid configuration "api"')
-//                     }
-//                 }
-//             }
-//             // TODO: load frontend components
-//         })
-//     }
-// })()
+ // TODO: possibly rename `Build` to: `Init` / `Setup` ?
 
 export default SmitStore;
 export { Build };

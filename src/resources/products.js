@@ -1,11 +1,11 @@
-import BaseResource from './extends/base'
+import CrudResource from './extends/crud';
 
-class ProductResource extends BaseResource {
-    constructor(config) {
-        super(config)
+class ProductResource extends CrudResource {
+  constructor(config) {
+    super(config);
 
-        this.resource = 'products'
-    }
+    this.resource = 'products';
+  }
 }
 
-export default ProductResource
+export default ProductResource;
