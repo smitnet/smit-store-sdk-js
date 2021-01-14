@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.22";
+var version = "1.0.23";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -184,7 +184,15 @@ class RequestHelper {
   async get(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
-      const response = await axios.get(`${this.config.requestBaseUrl}/${endpoint}`);
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey
+      };
+      const response = await axios.get(`${this.config.requestBaseUrl}/${endpoint}`, {
+        headers: { ...headers,
+          ...defaultHeaders
+        }
+      });
 
       if (response.status >= 200 && response.status <= 204) {
         return response.data;
@@ -197,8 +205,14 @@ class RequestHelper {
   async post(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey
+      };
       const response = await axios.post(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-        headers
+        headers: { ...headers,
+          ...defaultHeaders
+        }
       });
 
       if (response.status >= 200 && response.status <= 204) {
@@ -220,8 +234,14 @@ class RequestHelper {
   async put(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey
+      };
       const response = await axios.put(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-        headers
+        headers: { ...headers,
+          ...defaultHeaders
+        }
       });
 
       if (response.status >= 200 && response.status <= 204) {
@@ -243,8 +263,14 @@ class RequestHelper {
   async delete(url, data, headers = undefined) {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey
+      };
       const response = await axios.delete(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-        headers
+        headers: { ...headers,
+          ...defaultHeaders
+        }
       });
 
       if (response.status >= 200 && response.status <= 204) {

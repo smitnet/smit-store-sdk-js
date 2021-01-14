@@ -9,7 +9,7 @@
   var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
   var name = "@smitnet/smit-store-sdk";
-  var version = "1.0.22";
+  var version = "1.0.23";
   var description = "SMIT.STORE JAVASCRIPT SDK";
   var publishConfig = {
   	access: "public"
@@ -192,7 +192,15 @@
     async get(url, data, headers = undefined) {
       try {
         const endpoint = url[0] === '/' ? url.substr(1) : url;
-        const response = await axios__default['default'].get(`${this.config.requestBaseUrl}/${endpoint}`);
+        const defaultHeaders = {
+          Accept: 'application/json',
+          'X-Store-ID': this.config.apiKey
+        };
+        const response = await axios__default['default'].get(`${this.config.requestBaseUrl}/${endpoint}`, {
+          headers: { ...headers,
+            ...defaultHeaders
+          }
+        });
 
         if (response.status >= 200 && response.status <= 204) {
           return response.data;
@@ -205,8 +213,14 @@
     async post(url, data, headers = undefined) {
       try {
         const endpoint = url[0] === '/' ? url.substr(1) : url;
+        const defaultHeaders = {
+          Accept: 'application/json',
+          'X-Store-ID': this.config.apiKey
+        };
         const response = await axios__default['default'].post(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-          headers
+          headers: { ...headers,
+            ...defaultHeaders
+          }
         });
 
         if (response.status >= 200 && response.status <= 204) {
@@ -228,8 +242,14 @@
     async put(url, data, headers = undefined) {
       try {
         const endpoint = url[0] === '/' ? url.substr(1) : url;
+        const defaultHeaders = {
+          Accept: 'application/json',
+          'X-Store-ID': this.config.apiKey
+        };
         const response = await axios__default['default'].put(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-          headers
+          headers: { ...headers,
+            ...defaultHeaders
+          }
         });
 
         if (response.status >= 200 && response.status <= 204) {
@@ -251,8 +271,14 @@
     async delete(url, data, headers = undefined) {
       try {
         const endpoint = url[0] === '/' ? url.substr(1) : url;
+        const defaultHeaders = {
+          Accept: 'application/json',
+          'X-Store-ID': this.config.apiKey
+        };
         const response = await axios__default['default'].delete(`${this.config.requestBaseUrl}/${endpoint}`, data, {
-          headers
+          headers: { ...headers,
+            ...defaultHeaders
+          }
         });
 
         if (response.status >= 200 && response.status <= 204) {

@@ -9,8 +9,19 @@ class RequestHelper {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
 
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey,
+      };
+
       const response = await axios.get(
-        `${this.config.requestBaseUrl}/${endpoint}`
+        `${this.config.requestBaseUrl}/${endpoint}`,
+        {
+          headers: {
+            ...headers,
+            ...defaultHeaders,
+          },
+        }
       );
 
       if (response.status >= 200 && response.status <= 204) {
@@ -25,11 +36,19 @@ class RequestHelper {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
 
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey,
+      };
+
       const response = await axios.post(
         `${this.config.requestBaseUrl}/${endpoint}`,
         data,
         {
-          headers,
+          headers: {
+            ...headers,
+            ...defaultHeaders,
+          },
         }
       );
 
@@ -56,11 +75,19 @@ class RequestHelper {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
 
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey,
+      };
+
       const response = await axios.put(
         `${this.config.requestBaseUrl}/${endpoint}`,
         data,
         {
-          headers,
+          headers: {
+            ...headers,
+            ...defaultHeaders,
+          },
         }
       );
 
@@ -87,11 +114,19 @@ class RequestHelper {
     try {
       const endpoint = url[0] === '/' ? url.substr(1) : url;
 
+      const defaultHeaders = {
+        Accept: 'application/json',
+        'X-Store-ID': this.config.apiKey,
+      };
+
       const response = await axios.delete(
         `${this.config.requestBaseUrl}/${endpoint}`,
         data,
         {
-          headers,
+          headers: {
+            ...headers,
+            ...defaultHeaders,
+          },
         }
       );
 

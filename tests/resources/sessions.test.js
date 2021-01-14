@@ -2,20 +2,22 @@ const jwt = require('jsonwebtoken');
 const SmitStore = require('../../dist/index.cjs').Build;
 
 const sdk = SmitStore({
-  apiKey: 'test_123',
+  apiKey: process.env.API_KEY || 'test_123',
 });
 
 describe('session resource', () => {
   test('obtain guest session token', () => {
     return sdk.Sessions.Guest().then((data) => {
-      expect(data.split('.').length).toEqual(3);
+      expect(data.access_token.split('.').length).toEqual(3);
     });
   });
 
   test('it can refresh guest session token', () => {
     return sdk.Sessions.Guest().then((oldSession) => {
-      sdk.Sessions.Refresh(oldSession).then((newSession) => {
-        expect(jwt.decode(oldSession).jti).toEqual(jwt.decode(newSession).jti);
+      sdk.Sessions.Refresh(oldSession.access_token).then((newSession) => {
+        expect(jwt.decode(oldSession.access_token).jti).toEqual(
+          jwt.decode(newSession.access_token).jti
+        );
       });
     });
   });
