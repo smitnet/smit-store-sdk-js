@@ -1,10 +1,10 @@
 import pkg from '../package.json';
-import LocalStorageAdapter from './adapters/storage/localstorage';
+// import LocalStorageAdapter from './adapters/storage/localstorage';
 
 class Config {
   constructor(options) {
     const {
-      storage,
+      // storage,
       apiKey,
       hostname,
       protocol,
@@ -18,7 +18,7 @@ class Config {
     } = options;
 
     // storage
-    this.storage = storage || new LocalStorageAdapter();
+    // this.storage = storage || new LocalStorageAdapter();
 
     // request
     this.apiKey = apiKey || null;

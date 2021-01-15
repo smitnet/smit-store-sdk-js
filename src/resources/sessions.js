@@ -11,7 +11,7 @@ class SessionResource extends BaseResource {
 
   Guest() {
     return this.request.post(this.resource).then((response) => {
-      this.config.storage.set('access_token', response);
+      // this.config.storage.set('access_token', response);
 
       return response;
     });
@@ -27,7 +27,7 @@ class SessionResource extends BaseResource {
         Authorization: `Bearer ${token}`,
       })
       .then((response) => {
-        this.config.storage.set('access_token', response);
+        // this.config.storage.set('access_token', response);
 
         return response;
       });
@@ -48,7 +48,7 @@ class SessionResource extends BaseResource {
         password,
       })
       .then((response) => {
-        this.config.storage.set('access_token', response);
+        // this.config.storage.set('access_token', response);
 
         return response;
       });

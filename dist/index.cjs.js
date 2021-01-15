@@ -9,7 +9,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.23";
+var version = "1.0.24";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -106,37 +106,10 @@ var pkg = {
 	directories: directories
 };
 
-const {
-  LocalStorage
-} = require('node-localstorage');
-
-class LocalStorageAdapter {
-  constructor() {
-    if (typeof localStorage === 'undefined' || localStorage === null) {
-      this.localStorage = new LocalStorage('./localStorage');
-    } else {
-      this.localStorage = window.localStorage;
-    }
-  }
-
-  set(key, value) {
-    return this.localStorage.setItem(key, value);
-  }
-
-  get(key) {
-    return this.localStorage.getItem(key);
-  }
-
-  delete(key) {
-    return this.localStorage.removeItem(key);
-  }
-
-}
-
 class Config {
   constructor(options) {
     const {
-      storage,
+      // storage,
       apiKey,
       hostname,
       protocol,
@@ -148,8 +121,8 @@ class Config {
       throwExceptions,
       isDebug
     } = options; // storage
-
-    this.storage = storage || new LocalStorageAdapter(); // request
+    // this.storage = storage || new LocalStorageAdapter();
+    // request
 
     this.apiKey = apiKey || null;
     this.headers = headers || {};
@@ -354,7 +327,7 @@ class SessionResource extends BaseResource {
 
   Guest() {
     return this.request.post(this.resource).then(response => {
-      this.config.storage.set('access_token', response);
+      // this.config.storage.set('access_token', response);
       return response;
     });
   }
@@ -364,7 +337,7 @@ class SessionResource extends BaseResource {
     return this.request.post(`${this.resource}/refresh`, null, {
       Authorization: `Bearer ${token}`
     }).then(response => {
-      this.config.storage.set('access_token', response);
+      // this.config.storage.set('access_token', response);
       return response;
     });
   }
@@ -375,7 +348,7 @@ class SessionResource extends BaseResource {
       username,
       password
     }).then(response => {
-      this.config.storage.set('access_token', response);
+      // this.config.storage.set('access_token', response);
       return response;
     });
   }
