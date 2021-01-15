@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.25";
+var version = "1.0.26";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
