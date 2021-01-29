@@ -9,7 +9,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.27";
+var version = "1.0.28";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -411,6 +411,14 @@ class ProductResource extends CrudResource {
   constructor(config) {
     super(config);
     this.resource = 'products';
+  }
+
+  Find(slugOrId = undefined) {
+    if (slugOrId !== undefined) {
+      return this.request.post(`${this.resource}/${slugOrId}`).then(response => response);
+    }
+
+    return null;
   }
 
 }
