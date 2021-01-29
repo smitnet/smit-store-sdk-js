@@ -10,7 +10,7 @@ class ProductResource extends CrudResource {
   Find(slugOrId = undefined) {
     if (slugOrId !== undefined) {
       return this.request
-        .post(`${this.resource}/${slugOrId}`)
+        .get(`${this.resource}/${slugOrId}`)
         .then((response) => response);
     }
 

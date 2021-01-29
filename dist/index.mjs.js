@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 var name = "@smitnet/smit-store-sdk";
-var version = "1.0.28";
+var version = "1.0.29";
 var description = "SMIT.STORE JAVASCRIPT SDK";
 var publishConfig = {
 	access: "public"
@@ -407,7 +407,7 @@ class ProductResource extends CrudResource {
 
   Find(slugOrId = undefined) {
     if (slugOrId !== undefined) {
-      return this.request.post(`${this.resource}/${slugOrId}`).then(response => response);
+      return this.request.get(`${this.resource}/${slugOrId}`).then(response => response);
     }
 
     return null;
